@@ -5,18 +5,14 @@
     "type": "git",
     "url": "https://github.com/Drevoed/atomic-router-solid.git"
   },
-  "maintainers": [
-    "Kirill Mironov"
-  ],
+  "maintainers": ["Kirill Mironov"],
   "packageManager": "pnpm@7.7.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "browser": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -30,12 +26,7 @@
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "build": "NODE_ENV=production rollup -c rollup.config.js"
   },
-  "keywords": [
-    "router",
-    "solid-js",
-    "solid",
-    "routinf"
-  ],
+  "keywords": ["router", "solid-js", "solid", "routinf"],
   "author": {
     "name": "Kirill Mironov",
     "email": "vetrokm@gmail.com"
