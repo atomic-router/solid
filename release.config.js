@@ -6,15 +6,22 @@ module.exports = {
     [
       '@semantic-release/changelog',
       {
-        changelogFile: "CHANGELOG.md"
-      }
+        changelogFile: 'CHANGELOG.md',
+      },
     ],
     [
       '@semantic-release/git',
       {
-        assets: ["CHANGELOG.md"]
-      }
-    ]
+        assets: ['CHANGELOG.md'],
+      },
+    ],
   ],
-  branches: ['+([0-9])?(.{+([0-9]),x}).x', 'main', 'next', 'next-major', {name: 'beta', prerelease: true}, {name: 'alpha', prerelease: true}]
-}
+  branches: [
+    '+([0-9])?(.{+([0-9]),x}).x',
+    'main',
+    'next',
+    'next-major',
+    { name: 'beta', prerelease: true },
+    { name: 'alpha', prerelease: true },
+  ],
+};
