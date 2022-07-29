@@ -1,0 +1,13 @@
+node_modules/**
+**/node_modules/**
+build/**
+*.json
+!/src/**/package.json
+*.md
+*.less
+*.svg
+git
+**/dist/**/*.js
+vendored/**
+dist
+node_modules

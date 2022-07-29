@@ -1,0 +1,79 @@
+{
+  "name": "atomic-router-solid",
+  "version": "0.0.1",
+  "packageManager": "pnpm@7.7.0",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "node": "./dist/index.js",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "postinstall": "lefthook install",
+    "prettier": "prettier --write src",
+    "lint": "eslint --fix src/**/*.{ts,tsx}",
+    "build": "NODE_ENV=production rollup -c rollup.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@babel/preset-typescript": "^7.18.6",
+    "@commitlint/cli": "~17.0.3",
+    "@commitlint/config-conventional": "~17.0.3",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@swc/core": "^1.2.220",
+    "@types/babel__core": "^7.1.19",
+    "@types/node": "^18.6.2",
+    "@typescript-eslint/eslint-plugin": "~5.31.0",
+    "@typescript-eslint/parser": "~5.31.0",
+    "atomic-router": "~0.4.3",
+    "babel-preset-solid": "^1.4.8",
+    "commitizen": "~4.2.5",
+    "cz-conventional-changelog": "~3.3.0",
+    "effector": "~22.3.0",
+    "effector-solid": "~0.22.1",
+    "eslint": "~8.20.0",
+    "eslint-config-prettier": "~8.5.0",
+    "eslint-config-prettier-standard": "~4.0.1",
+    "eslint-config-standard": "~17.0.0",
+    "eslint-plugin-import": "~2.26.0",
+    "eslint-plugin-jsx-a11y": "~6.6.1",
+    "eslint-plugin-n": "~15.2.4",
+    "eslint-plugin-node": "~11.1.0",
+    "eslint-plugin-prettier": "~4.2.1",
+    "eslint-plugin-promise": "~6.0.0",
+    "eslint-plugin-simple-import-sort": "~7.0.0",
+    "history": "~5",
+    "lefthook": "~1.0.5",
+    "lint-staged": "~13.0.3",
+    "prettier": "~2.7.1",
+    "prettier-config-standard": "~5.0.0",
+    "rollup": "^2.77.2",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-swc3": "^0.3.0",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "solid-js": "~1.4.8",
+    "typescript": "~4.7.4"
+  },
+  "peerDependencies": {
+    "atomic-router": "~0.4.3",
+    "effector": "~22.3.0",
+    "effector-solid": "~0.22.1",
+    "history": "~5",
+    "solid-js": "~1.4.8"
+  },
+  "dependencies": {
+    "classcat": "~5.0.3"
+  }
+}
