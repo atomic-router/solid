@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "declarationMap": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "noImplicitAny": false,
     "allowJs": false,
     "skipLibCheck": false,
@@ -29,14 +25,6 @@
       "history": ["node_modules/history"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "*.test.ts",
-    "*.test.tsx",
-    "*.spec.ts",
-    "*.spec.tsx"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["*.test.ts", "*.test.tsx", "*.spec.ts", "*.spec.tsx"]
 }

@@ -4,7 +4,7 @@ import dts from 'rollup-plugin-dts';
 import resolve from '@rollup/plugin-node-resolve';
 import { swc } from 'rollup-plugin-swc3';
 import babel from '@rollup/plugin-babel';
-import { DEFAULT_EXTENSIONS } from '@babel/core'
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 
 export default defineConfig([
   {
@@ -12,40 +12,31 @@ export default defineConfig([
     plugins: [
       resolve(),
       babel({
-        presets: [
-          '@babel/preset-typescript',
-          'babel-preset-solid'
-        ],
+        presets: ['@babel/preset-typescript', 'babel-preset-solid'],
         extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
-        include: ['src/**']
+        include: ['src/**'],
       }),
       swc({
-        minify: process.env.NODE_ENV === 'production'
+        minify: process.env.NODE_ENV === 'production',
       }),
     ],
-    external: [
-      ...Object.keys(pkg.peerDependencies),
-      'solid-js/web',
-    ],
+    external: [...Object.keys(pkg.peerDependencies), 'solid-js/web'],
     output: [
       {
         file: 'dist/cjs/index.js',
-        format: 'cjs'
+        format: 'cjs',
       },
       {
         file: 'dist/esm/index.js',
-        format: 'esm'
-      }
-    ]
+        format: 'esm',
+      },
+    ],
   },
   {
     input: 'src/index.ts',
     output: {
-      file: 'dist/index.d.ts'
+      file: 'dist/index.d.ts',
     },
-    plugins: [
-      resolve(),
-      dts(),
-    ]
-  }
-])
+    plugins: [resolve(), dts()],
+  },
+]);
