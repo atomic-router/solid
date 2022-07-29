@@ -1,29 +1,46 @@
 {
   "name": "atomic-router-solid",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drevoed/atomic-router-solid.git"
+  },
+  "maintainers": [
+    "Kirill Mironov"
+  ],
   "packageManager": "pnpm@7.7.0",
   "description": "",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/cjs/index.js",
+  "browser": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "node": "./dist/index.js",
-      "default": "./dist/index.mjs"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "node": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
     }
   },
   "scripts": {
-    "postinstall": "lefthook install",
     "prettier": "prettier --write src",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "build": "NODE_ENV=production rollup -c rollup.config.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "router",
+    "solid-js",
+    "solid",
+    "routinf"
+  ],
+  "author": {
+    "name": "Kirill Mironov",
+    "email": "vetrokm@gmail.com"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/preset-typescript": "^7.18.6",
@@ -32,6 +49,8 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "@semantic-release/changelog": "~6.0.1",
+    "@semantic-release/git": "~10.0.1",
     "@swc/core": "^1.2.220",
     "@types/babel__core": "^7.1.19",
     "@types/node": "^18.6.2",
@@ -63,8 +82,10 @@
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-swc3": "^0.3.0",
     "rollup-plugin-typescript2": "^0.32.1",
+    "semantic-release": "~19.0.3",
     "solid-js": "~1.4.8",
-    "typescript": "~4.7.4"
+    "typescript": "~4.7.4",
+    "vitest": "~0.19.1"
   },
   "peerDependencies": {
     "atomic-router": "~0.4.3",
@@ -75,5 +96,10 @@
   },
   "dependencies": {
     "classcat": "~5.0.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
