@@ -64,8 +64,8 @@ import { Link } from 'atomic-router-solid'
   to={route}
   params={{ foo: 'bar' }}
   query={{ bar: 'baz' }}
-  activeClassName="font-semibold text-red-400"
-  inactiveClassName="opacity-80"
+  activeClass="font-semibold text-red-400"
+  inactiveClass="opacity-80"
 />
 ```
 
