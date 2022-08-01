@@ -6,7 +6,7 @@ import {
 } from 'atomic-router';
 import cc from 'classcat';
 import { useUnit } from 'effector-solid';
-import { createMemo, JSX, mergeProps, Show } from 'solid-js';
+import { createMemo, JSX, mergeProps, Show, splitProps } from 'solid-js';
 
 import { useRouter } from './router-provider';
 
@@ -22,16 +22,22 @@ export function Link<Params extends RouteParams>(props: Props<Params>) {
   props = mergeProps(props, {
     activeClass: 'active',
   });
+  const [split, rest] = splitProps(props, [
+    'to',
+    'params',
+    'query',
+    'class',
+    'activeClass',
+    'inactiveClass',
+  ]);
 
-  const toIsString = createMemo(() => typeof props.to === 'string');
+  const toIsString = createMemo(() => typeof split.to === 'string');
 
   return (
     <Show
       when={toIsString()}
-      fallback={
-        <RouteLink {...props} to={props.to as RouteInstance<Params>} />
-      }>
-      <NormalLink {...props} />
+      fallback={<RouteLink {...rest} to={split.to as RouteInstance<Params>} />}>
+      <NormalLink href={split.to as string} {...rest} />
     </Show>
   );
 }
@@ -52,9 +58,17 @@ function RouteLink<Params extends RouteParams>(
     inactiveClass?: string;
   } & JSX.AnchorHTMLAttributes<HTMLAnchorElement>
 ) {
+  const [split, rest] = splitProps(props, [
+    'to',
+    'params',
+    'query',
+    'class',
+    'activeClass',
+    'inactiveClass',
+  ]);
   const router = useRouter();
   const routeObj = router.routes.find(
-    (routeObj) => routeObj.route === props.to
+    (routeObj) => routeObj.route === split.to
   );
 
   if (!routeObj) {
@@ -66,33 +80,39 @@ function RouteLink<Params extends RouteParams>(
   const href = createMemo(() =>
     buildPath({
       pathCreator: routeObj.path,
-      params: props.params || {},
-      query: props.query || {},
+      params: split.params || {},
+      query: split.query || {},
     })
   );
+
+  const classes = createMemo(() => {
+    const combined = cc([
+      split.class,
+      isOpened() ? split.activeClass : split.inactiveClass,
+    ]);
+
+    return combined === '' ? undefined : combined;
+  });
 
   return (
     <a
       href={href()}
-      class={cc([
-        props.class,
-        isOpened() ? props.activeClass : props.inactiveClass,
-      ])}
+      class={classes()}
       onClick={(evt) => {
         evt.preventDefault();
-        props.to.navigate({
+        split.to.navigate({
           params: props.params || ({} as Params),
           query: props.query || {},
         });
-        if (props.onClick) {
-          if (typeof props.onClick === 'function') {
-            props.onClick(evt);
+        if (rest.onClick) {
+          if (typeof rest.onClick === 'function') {
+            rest.onClick(evt);
           } else {
-            props.onClick[0](evt, props.onClick[1]);
+            rest.onClick[0](evt, rest.onClick[1]);
           }
         }
       }}
-      {...props}>
+      {...rest}>
       {props.children}
     </a>
   );

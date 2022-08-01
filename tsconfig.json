@@ -22,8 +22,10 @@
     "baseUrl": ".",
     "paths": {
       "effector": ["node_modules/effector"],
-      "history": ["node_modules/history"]
-    }
+      "history": ["node_modules/history"],
+      "atomic-router-solid": ["src"]
+    },
+    "types": ["vite/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["*.test.ts", "*.test.tsx", "*.spec.ts", "*.spec.tsx"]

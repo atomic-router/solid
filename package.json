@@ -5,18 +5,14 @@
     "type": "git",
     "url": "https://github.com/Drevoed/atomic-router-solid.git"
   },
-  "maintainers": [
-    "Kirill Mironov"
-  ],
+  "maintainers": ["Kirill Mironov"],
   "packageManager": "pnpm@7.7.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "browser": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -26,17 +22,13 @@
     }
   },
   "scripts": {
+    "dev": "vite",
     "prettier": "prettier --write ./**/*.{js,ts,tsx}",
     "prettier:json": "prettier --write --parser json ./**/*.json",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "build": "NODE_ENV=production rollup -c rollup.config.js"
   },
-  "keywords": [
-    "router",
-    "solid-js",
-    "solid",
-    "routinf"
-  ],
+  "keywords": ["router", "solid-js", "solid", "routinf"],
   "author": {
     "name": "Kirill Mironov",
     "email": "vetrokm@gmail.com"
@@ -86,6 +78,8 @@
     "semantic-release": "~19.0.3",
     "solid-js": "~1.4.8",
     "typescript": "~4.7.4",
+    "vite": "~3.0.4",
+    "vite-plugin-solid": "~2.3.0",
     "vitest": "~0.19.1"
   },
   "peerDependencies": {

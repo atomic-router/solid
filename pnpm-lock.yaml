@@ -45,6 +45,8 @@ specifiers:
   semantic-release: ~19.0.3
   solid-js: ~1.4.8
   typescript: ~4.7.4
+  vite: ~3.0.4
+  vite-plugin-solid: ~2.3.0
   vitest: ~0.19.1
 
 dependencies:
@@ -94,6 +96,8 @@ devDependencies:
   semantic-release: 19.0.3
   solid-js: 1.4.8
   typescript: 4.7.4
+  vite: 3.0.4
+  vite-plugin-solid: 2.3.0_solid-js@1.4.8+vite@3.0.4
   vitest: 0.19.1
 
 packages:
@@ -3669,6 +3673,11 @@ packages:
       call-bind: 1.0.2
     dev: true
 
+  /is-what/4.1.7:
+    resolution: {integrity: sha512-DBVOQNiPKnGMxRMLIYSwERAS5MVY1B7xYiGnpgctsOFvVDz9f9PFXXxMcTOHuoqYp4NK9qFYQaIC1NRRxLMpBQ==}
+    engines: {node: '>=12.13'}
+    dev: true
+
   /is-windows/1.0.2:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
     engines: {node: '>=0.10.0'}
@@ -4099,6 +4108,14 @@ packages:
       trim-newlines: 3.0.1
       type-fest: 0.18.1
       yargs-parser: 20.2.9
+    dev: true
+
+  /merge-anything/5.0.2:
+    resolution: {integrity: sha512-POPQBWkBC0vxdgzRJ2Mkj4+2NTKbvkHo93ih+jGDhNMLzIw+rYKjO7949hOQM2X7DxMHH1uoUkwWFLIzImw7gA==}
+    engines: {node: '>=12.13'}
+    dependencies:
+      is-what: 4.1.7
+      ts-toolbelt: 9.6.0
     dev: true
 
   /merge-stream/2.0.0:
@@ -5080,6 +5097,17 @@ packages:
     resolution: {integrity: sha512-XErZdnnYYXF7OwGSUAPcua2y5/ELB/c53zFCpWiEGqxTNoH1iQghzI8EsHJXk06sNn+Z/TGhb8bPDNNGSgimag==}
     dev: true
 
+  /solid-refresh/0.4.1_solid-js@1.4.8:
+    resolution: {integrity: sha512-v3tD/OXQcUyXLrWjPW1dXZyeWwP7/+GQNs8YTL09GBq+5FguA6IejJWUvJDrLIA4M0ho9/5zK2e9n+uy+4488g==}
+    peerDependencies:
+      solid-js: ^1.3
+    dependencies:
+      '@babel/generator': 7.18.9
+      '@babel/helper-module-imports': 7.18.6
+      '@babel/types': 7.18.9
+      solid-js: 1.4.8
+    dev: true
+
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -5390,6 +5418,10 @@ packages:
       yn: 3.1.1
     dev: true
 
+  /ts-toolbelt/9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
+    dev: true
+
   /tsconfig-paths/3.14.1:
     resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==}
     dependencies:
@@ -5556,6 +5588,23 @@ packages:
     dependencies:
       spdx-correct: 3.1.1
       spdx-expression-parse: 3.0.1
+    dev: true
+
+  /vite-plugin-solid/2.3.0_solid-js@1.4.8+vite@3.0.4:
+    resolution: {integrity: sha512-N2sa54C3UZC2nN5vpj5o6YP+XdIAZW6n6xv8OasxNAcAJPFeZT7EOVvumL0V4c8hBz1yuYniMWdESY8807fVSg==}
+    peerDependencies:
+      solid-js: ^1.3.17
+      vite: ^3.0.0
+    dependencies:
+      '@babel/core': 7.18.9
+      '@babel/preset-typescript': 7.18.6_@babel+core@7.18.9
+      babel-preset-solid: 1.4.8_@babel+core@7.18.9
+      merge-anything: 5.0.2
+      solid-js: 1.4.8
+      solid-refresh: 0.4.1_solid-js@1.4.8
+      vite: 3.0.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite/3.0.4:
