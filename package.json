@@ -1,6 +1,6 @@
 {
   "name": "atomic-router-solid",
-  "version": "0.5.0-dev.1",
+  "version": "0.0.0-this-version-will-be-set-from-ci",
   "repository": {
     "type": "git",
     "url": "https://github.com/Drevoed/atomic-router-solid.git"
