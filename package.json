@@ -5,14 +5,18 @@
     "type": "git",
     "url": "https://github.com/Drevoed/atomic-router-solid.git"
   },
-  "maintainers": ["Kirill Mironov"],
+  "maintainers": [
+    "Kirill Mironov"
+  ],
   "packageManager": "pnpm@7.7.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "browser": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -28,7 +32,12 @@
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "build": "NODE_ENV=production rollup -c rollup.config.js"
   },
-  "keywords": ["router", "solid-js", "solid", "routinf"],
+  "keywords": [
+    "router",
+    "solid-js",
+    "solid",
+    "routinf"
+  ],
   "author": {
     "name": "Kirill Mironov",
     "email": "vetrokm@gmail.com"
@@ -49,7 +58,7 @@
     "@types/node": "^18.6.2",
     "@typescript-eslint/eslint-plugin": "~5.31.0",
     "@typescript-eslint/parser": "~5.31.0",
-    "atomic-router": "~0.4.3",
+    "atomic-router": "^0.7.0",
     "babel-preset-solid": "^1.4.8",
     "commitizen": "~4.2.5",
     "cz-conventional-changelog": "~3.3.0",
@@ -83,7 +92,7 @@
     "vitest": "~0.19.1"
   },
   "peerDependencies": {
-    "atomic-router": "~0.4.3",
+    "atomic-router": "^0.7.0",
     "effector": "~22.3.0",
     "effector-solid": "~0.22.1",
     "history": "~5",
