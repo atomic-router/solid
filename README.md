@@ -18,6 +18,6 @@ pnpm i effector effector-solid solid-js
 
 ## Documentation
 
-Please, open [official documentation for the bindings](https://atomic-router.github.io/react/installation.html).
+Please, open [official documentation for the bindings](https://atomic-router.github.io/solidjs/installation.html).
 
 All types is built from the [source code](https://github.com/atomic-router/solid/tree/main/src).
