@@ -22,22 +22,24 @@ export function Link<Params extends RouteParams>(props: Props<Params>) {
   props = mergeProps(props, {
     activeClass: 'active',
   });
-  const [split, rest] = splitProps(props, [
+
+  const toIsString = createMemo(() => typeof props.to === 'string');
+
+  const [_, normal] = splitProps(props, [
     'to',
     'params',
     'query',
-    'class',
     'activeClass',
     'inactiveClass',
+    'href',
   ]);
-
-  const toIsString = createMemo(() => typeof split.to === 'string');
 
   return (
     <Show
       when={toIsString()}
-      fallback={<RouteLink {...rest} to={split.to as RouteInstance<Params>} />}>
-      <NormalLink href={split.to as string} {...rest} />
+      fallback={<RouteLink {...props} to={props.to as RouteInstance<Params>} />}
+      keyed={false}>
+      <NormalLink href={props.to as string} {...normal} />
     </Show>
   );
 }

@@ -19,7 +19,7 @@ export const createRouteView = <Props,>(
     const isOpened = useUnit($isOpened);
 
     return (
-      <Show when={isOpened()}>
+      <Show when={isOpened()} keyed={false}>
         <Dynamic component={View} {...props} />
       </Show>
     );

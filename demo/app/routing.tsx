@@ -18,6 +18,7 @@ export const history = createBrowserHistory();
 
 export const router = createHistoryRouter({
   routes,
+  notFoundRoute: NotFound.route,
 });
 
 router.setHistory(history);
