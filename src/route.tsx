@@ -1,33 +1,28 @@
 import type { RouteInstance, RouteParams } from 'atomic-router';
-import { useStoreMap } from 'effector-solid';
+import { useUnit } from 'effector-solid';
 import type { Component } from 'solid-js';
-import { Show } from 'solid-js';
+import { createMemo, Show } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
-
-import { useRouter } from './router-provider';
 
 type RouteProps<Params extends RouteParams> = {
   route: RouteInstance<Params> | RouteInstance<Params>[];
   view: Component;
 };
 
-export function Route<Params>(props: RouteProps<Params>) {
-  const router = useRouter();
+export function Route<Params extends RouteParams>(props: RouteProps<Params>) {
+  const isOpened = createMemo(() => {
+    const route = props.route;
 
-  const activeRoutes = router.$activeRoutes;
+    if (Array.isArray(route)) {
+      const allRoutes = useUnit(route.map((route) => route.$isOpened));
+      return allRoutes.some((r) => r());
+    }
 
-  const isOpened = useStoreMap({
-    store: activeRoutes,
-    keys: [props.route],
-    fn: (activeRoutes, [route]) => {
-      return Array.isArray(route)
-        ? route.some((route) => activeRoutes.includes(route))
-        : activeRoutes.includes(route);
-    },
+    return useUnit(route.$isOpened)();
   });
 
   return (
-    <Show when={isOpened()}>
+    <Show when={isOpened()} keyed={false}>
       <Dynamic component={props.view} />
     </Show>
   );

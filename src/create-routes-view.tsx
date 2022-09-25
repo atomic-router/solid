@@ -32,7 +32,10 @@ export const createRoutesView = (config: {
     const isSomeOpened = useUnit($isSomeOpened);
 
     return (
-      <Show when={isSomeOpened()} fallback={<Dynamic component={NotFound!} />}>
+      <Show
+        when={isSomeOpened()}
+        fallback={<Dynamic component={NotFound!} />}
+        keyed={false}>
         <For each={views}>{(View) => <Dynamic component={View} />}</For>
       </Show>
     );

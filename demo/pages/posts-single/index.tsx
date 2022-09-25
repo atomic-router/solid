@@ -23,7 +23,7 @@ const Page = () => {
   const pending = useUnit(getPostFx.pending);
 
   return (
-    <Show when={!pending()} fallback="Loading...">
+    <Show when={!pending()} fallback="Loading..." keyed={false}>
       <Post />
     </Show>
   );
@@ -33,7 +33,7 @@ const Post = () => {
   const post = useUnit($post);
 
   return (
-    <Show when={post()}>
+    <Show when={post()} keyed>
       {(post) => (
         <article>
           <h1>{post.title}</h1>
