@@ -87,7 +87,7 @@
     "effector": "~22.3.0",
     "effector-solid": "~0.22.1",
     "history": "~5",
-    "solid-js": "^1.5"
+    "solid-js": "^1.4 || ^1.5"
   },
   "dependencies": {
     "classcat": "~5.0.4"
