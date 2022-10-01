@@ -1,43 +1,50 @@
-import type { RouteInstance } from 'atomic-router';
-import { combine } from 'effector';
-import { useUnit } from 'effector-solid';
-import type { Component } from 'solid-js';
-import { For, Show } from 'solid-js';
-import { Dynamic } from 'solid-js/web';
+import type { RouteInstance, RouteParams } from 'atomic-router';
+import { Component, createMemo, Match, mergeProps, Switch } from 'solid-js';
+import { Dynamic, For } from 'solid-js/web';
 
-import { createRouteView } from './create-route-view';
+import { createIsOpened } from './create-is-opened';
 
-export const createRoutesView = (config: {
-  routes: {
-    route: RouteInstance<any> | RouteInstance<any>[];
-    view: Component<any>;
-  }[];
-  notFound?: Component<any>;
-}) => {
-  const views = config.routes.map(({ route, view }) =>
-    createRouteView(route, view)
-  );
-  const $isSomeOpened = combine(
-    ...config.routes
-      .map(({ route }) => route)
-      .flat()
-      .map((route) => route.$isOpened),
-    // @ts-expect-error
-    (...isOpened) => isOpened.some(Boolean)
-  );
+interface RouteRecord<Props, Params extends RouteParams> {
+  route: RouteInstance<Params> | RouteInstance<Params>[];
+  view: Component<Props>;
+}
 
-  const NotFound = config.notFound;
+export interface RoutesViewConfig {
+  routes: RouteRecord<any, any>[];
+  otherwise?: Component<any>;
+}
 
-  return () => {
-    const isSomeOpened = useUnit($isSomeOpened);
+export function createRoutesView<Config extends RoutesViewConfig>(
+  config: Config
+) {
+  return (props: Omit<Config, keyof Config>) => {
+    const mergedConfig = mergeProps(config, props) as Config;
+    const routes = createMemo(() =>
+      mergedConfig.routes.map((routeRecord) => {
+        const isOpened = createIsOpened(routeRecord.route);
+        return {
+          ...routeRecord,
+          get isOpened() {
+            return isOpened();
+          },
+        };
+      })
+    );
 
     return (
-      <Show
-        when={isSomeOpened()}
-        fallback={<Dynamic component={NotFound!} />}
-        keyed={false}>
-        <For each={views}>{(View) => <Dynamic component={View} />}</For>
-      </Show>
+      <Switch fallback={null}>
+        <For each={routes()}>
+          {(route) => (
+            <Match when={route.isOpened} keyed={false}>
+              <Dynamic component={route.view} />
+            </Match>
+          )}
+        </For>
+
+        <Match when={mergedConfig.otherwise} keyed={false}>
+          <Dynamic component={mergedConfig.otherwise} />
+        </Match>
+      </Switch>
     );
   };
-};
+}

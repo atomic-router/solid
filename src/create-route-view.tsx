@@ -1,27 +1,45 @@
-import type { RouteInstance } from 'atomic-router';
-import { combine } from 'effector';
-import { useUnit } from 'effector-solid';
+import type { RouteInstance, RouteParams } from 'atomic-router';
 import type { Component } from 'solid-js';
-import { Show } from 'solid-js';
+import { Match, mergeProps, Switch } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 
-export const createRouteView = <Props,>(
-  route: RouteInstance<any> | RouteInstance<any>[],
-  View: Component<Props>
-) => {
-  const $isOpened = Array.isArray(route)
-    ? combine(combine(route.map((r) => r.$isOpened)), (isOpened) =>
-        isOpened.includes(true)
-      )
-    : route.$isOpened;
+import { createIsOpened } from './create-is-opened';
 
-  return (props: Props) => {
-    const isOpened = useUnit($isOpened);
+export interface RouteViewConfig<Props, Params extends RouteParams> {
+  route: RouteInstance<Params> | RouteInstance<Params>[];
+  view: Component<Props>;
+  otherwise?: Component<Props>;
+}
+
+export function createRouteView<
+  Props,
+  Params extends RouteParams,
+  Config extends {
+    [key in keyof RouteViewConfig<Props, Params>]?: RouteViewConfig<
+      Props,
+      Params
+    >[key];
+  }
+>(config: Config) {
+  return (
+    props: Props & Omit<RouteViewConfig<Props, Params>, keyof Config>
+  ) => {
+    const mergedConfig = mergeProps(config, props) as RouteViewConfig<
+      Props,
+      Params
+    >;
+    const isOpened = createIsOpened(mergedConfig.route);
 
     return (
-      <Show when={isOpened()} keyed={false}>
-        <Dynamic component={View} {...props} />
-      </Show>
+      <Switch fallback={null}>
+        <Match when={isOpened()} keyed={false}>
+          <Dynamic component={mergedConfig.view} {...props} />
+        </Match>
+
+        <Match when={mergedConfig.otherwise} keyed={false}>
+          <Dynamic component={mergedConfig.otherwise} {...props} />
+        </Match>
+      </Switch>
     );
   };
-};
+}

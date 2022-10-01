@@ -19,7 +19,7 @@ type Props<Params extends RouteParams> = {
 } & Exclude<JSX.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>;
 
 export function Link<Params extends RouteParams>(props: Props<Params>) {
-  props = mergeProps({activeClass: 'active'}, props);
+  props = mergeProps({ activeClass: 'active' }, props);
 
   const toIsString = createMemo(() => typeof props.to === 'string');
 

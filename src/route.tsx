@@ -1,8 +1,9 @@
 import type { RouteInstance, RouteParams } from 'atomic-router';
-import { useUnit } from 'effector-solid';
 import type { Component } from 'solid-js';
-import { createMemo, Show } from 'solid-js';
+import { Show } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
+
+import { createIsOpened } from './create-is-opened';
 
 type RouteProps<Params extends RouteParams> = {
   route: RouteInstance<Params> | RouteInstance<Params>[];
@@ -10,16 +11,7 @@ type RouteProps<Params extends RouteParams> = {
 };
 
 export function Route<Params extends RouteParams>(props: RouteProps<Params>) {
-  const isOpened = createMemo(() => {
-    const route = props.route;
-
-    if (Array.isArray(route)) {
-      const allRoutes = useUnit(route.map((route) => route.$isOpened));
-      return allRoutes.some((r) => r());
-    }
-
-    return useUnit(route.$isOpened)();
-  });
+  const isOpened = createIsOpened(props.route);
 
   return (
     <Show when={isOpened()} keyed={false}>
