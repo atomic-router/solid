@@ -22,9 +22,3 @@ export const router = createHistoryRouter({
 });
 
 router.setHistory(history);
-
-sample({
-  clock: router.routeNotFound,
-  fn: () => ({}),
-  target: NotFound.route.open,
-});
