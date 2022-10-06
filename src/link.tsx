@@ -65,6 +65,7 @@ function RouteLink<Params extends RouteParams>(
     'class',
     'activeClass',
     'inactiveClass',
+    'onClick',
   ]);
   const router = useRouter();
   const routeObj = router.routes.find(
@@ -104,11 +105,11 @@ function RouteLink<Params extends RouteParams>(
           params: props.params || ({} as Params),
           query: props.query || {},
         });
-        if (rest.onClick) {
-          if (typeof rest.onClick === 'function') {
-            rest.onClick(evt);
+        if (split.onClick) {
+          if (typeof split.onClick === 'function') {
+            split.onClick(evt);
           } else {
-            rest.onClick[0](evt, rest.onClick[1]);
+            split.onClick[0](evt, split.onClick[1]);
           }
         }
       }}
