@@ -23,10 +23,11 @@ export function Link<Params extends RouteParams>(props: Props<Params>) {
 
   const toIsString = createMemo(() => typeof props.to === 'string');
 
-  const [_, normal] = splitProps(props, [
+  const [routeProps, normalProps] = splitProps(props, [
     'to',
     'params',
     'query',
+    'class',
     'activeClass',
     'inactiveClass',
     'href',
@@ -35,9 +36,19 @@ export function Link<Params extends RouteParams>(props: Props<Params>) {
   return (
     <Show
       when={toIsString()}
-      fallback={<RouteLink {...props} to={props.to as RouteInstance<Params>} />}
+      fallback={
+        <RouteLink
+          {...routeProps}
+          {...props}
+          to={props.to as RouteInstance<Params>}
+        />
+      }
       keyed={false}>
-      <NormalLink href={props.to as string} {...normal} />
+      <NormalLink
+        href={props.to as string}
+        class={props.class}
+        {...normalProps}
+      />
     </Show>
   );
 }
@@ -45,7 +56,7 @@ export function Link<Params extends RouteParams>(props: Props<Params>) {
 function NormalLink(
   props: { class?: string } & JSX.AnchorHTMLAttributes<HTMLAnchorElement>
 ) {
-  return <a class={props.class} {...props} />;
+  return <a class={cc(props.class)} {...props} />;
 }
 
 function RouteLink<Params extends RouteParams>(
@@ -58,6 +69,13 @@ function RouteLink<Params extends RouteParams>(
     inactiveClass?: string;
   } & JSX.AnchorHTMLAttributes<HTMLAnchorElement>
 ) {
+  props = mergeProps(
+    {
+      activeClass: 'active',
+    },
+    props
+  );
+
   const [split, rest] = splitProps(props, [
     'to',
     'params',
