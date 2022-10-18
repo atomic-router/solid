@@ -10,7 +10,7 @@ import { createMemo, JSX, mergeProps, Show, splitProps } from 'solid-js';
 
 import { useRouter } from './router-provider';
 
-type Props<Params extends RouteParams> = {
+export type LinkProps<Params extends RouteParams> = {
   to: RouteInstance<Params> | string;
   params?: Params;
   query?: RouteQuery;
@@ -18,7 +18,7 @@ type Props<Params extends RouteParams> = {
   inactiveClass?: string;
 } & Exclude<JSX.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>;
 
-export function Link<Params extends RouteParams>(props: Props<Params>) {
+export function Link<Params extends RouteParams>(props: LinkProps<Params>) {
   props = mergeProps({ activeClass: 'active' }, props);
 
   const toIsString = createMemo(() => typeof props.to === 'string');

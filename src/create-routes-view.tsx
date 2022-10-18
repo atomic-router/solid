@@ -1,12 +1,20 @@
 import type { RouteInstance, RouteParams } from 'atomic-router';
-import { Component, createMemo, Match, mergeProps, Switch } from 'solid-js';
-import { Dynamic, For } from 'solid-js/web';
+import {
+  Component,
+  createMemo,
+  JSXElement,
+  Match,
+  mergeProps,
+  Switch,
+} from 'solid-js';
+import { Dynamic, For, Show } from 'solid-js/web';
 
 import { createIsOpened } from './create-is-opened';
 
 interface RouteRecord<Props, Params extends RouteParams> {
   route: RouteInstance<Params> | RouteInstance<Params>[];
   view: Component<Props>;
+  layout?: Component<{ children: JSXElement }>;
 }
 
 export interface RoutesViewConfig {
@@ -36,7 +44,16 @@ export function createRoutesView<Config extends RoutesViewConfig>(
         <For each={routes()}>
           {(route) => (
             <Match when={route.isOpened} keyed={false}>
-              <Dynamic component={route.view} />
+              <Show
+                when={route.layout}
+                keyed
+                fallback={<Dynamic component={route.view} />}>
+                {(Layout) => (
+                  <Dynamic component={Layout}>
+                    <Dynamic component={route.view} />
+                  </Dynamic>
+                )}
+              </Show>
             </Match>
           )}
         </For>
