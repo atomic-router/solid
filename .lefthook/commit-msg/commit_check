@@ -1,3 +1,3 @@
-if ! commitlint --edit --verbose; then
+if ! pnpm commitlint --edit --verbose; then
     exit 1
 fi
